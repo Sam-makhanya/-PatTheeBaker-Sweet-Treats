@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#PatTheeBaker Sweet Treats | Bespoke Cakes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Lora:wght@400;500;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --cake-pink: #ff8fa3;
+            --berry-red: #c9184a;
+            --cream: #fffaf2;
+            --chocolate: #3d2b1f;
+            --frosting: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Lora', serif;
+            background-color: var(--cream);
+            color: var(--chocolate);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Navigation --- */
+        header {
+            background: var(--frosting);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(61, 43, 31, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--cake-pink);
+        }
+
+        .logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem; 
+            color: var(--berry-red);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--chocolate);
+            margin-left: 20px;
+            font-weight: 700;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover { color: var(--berry-red); }
+
+        /* Mobile Menu Button (Hidden on Desktop) */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .mobile-toggle span {
+            width: 30px;
+            height: 3px;
+            background-color: var(--berry-red);
+            transition: 0.3s;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 65vh;
+            background: linear-gradient(rgba(61, 43, 31, 0.4), rgba(61, 43, 31, 0.4)), 
+                        url('https://images.unsplash.com/photo-1535141192574-5d4897c12636?q=80&w=1976&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            color: var(--frosting);
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-style: italic;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        /* --- About Section --- */
+        .about-section {
+            padding: 100px 10%;
+            background-color: var(--frosting);
+        }
+
+        .about-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .about-image img {
+            width: 350px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 8px solid var(--cream);
+            box-shadow: 0 15px 35px rgba(201, 24, 74, 0.15);
+            transition: transform 0.5s ease;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.05);
+        }
+
+        .about-content {
+            flex: 1.5;
+            min-width: 300px;
+            text-align: left;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--chocolate);
+        }
+
+        /* --- Catalog Section --- */
+        .section { padding: 80px 5%; text-align: center; }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            color: var(--berry-red);
+        }
+
+        .search-container { margin-bottom: 50px; }
+        #cakeSearch {
+            padding: 15px 30px;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 0;
+            border: 1px solid var(--cake-pink);
+            background: var(--frosting);
+            outline: none;
+            font-family: 'Lora', serif;
+        }
+
+        .cake-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .cake-card {
+            background: var(--frosting);
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 10px 10px 0px var(--cake-pink);
+            transition: 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #eee;
+        }
+
+        .cake-card:hover { transform: translate(-5px, -5px); box-shadow: 15px 15px 0px var(--berry-red); }
+
+        .cake-img-container {
+            width: 100%;
+            height: 300px;
+            background-color: #fdfdfd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 15px;
+        }
+
+        .cake-img-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .cake-info { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; text-align: left; }
+        .cake-info h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 10px; color: var(--chocolate); }
+        .cake-info p { font-size: 0.9rem; color: #555; margin-bottom: 20px; flex-grow: 1; }
+        .price { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--berry-red); margin-bottom: 20px; display: block;}
+
+        .btn {
+            background: var(--chocolate);
+            color: white;
+            padding: 14px 28px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        .btn:hover { background: var(--berry-red); }
+
+        /* --- Order Form Styles --- */
+        .order-form-container {
+            background: var(--frosting);
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(61, 43, 31, 0.1);
+            text-align: left;
+            border-top: 5px solid var(--berry-red);
+        }
+
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; font-size: 0.8rem; color: var(--chocolate); }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 0;
+            font-family: 'Lora', serif;
+            outline: none;
+        }
+
+        /* --- Cancel Section --- */
+        .cancel-section {
+            padding: 80px 5%;
+            background-color: #fde2e4;
+            text-align: center;
+            border-top: 2px dashed var(--berry-red);
+        }
+
+        /* --- Social Footer --- */
+        .social-footer {
+            background: var(--frosting);
+            padding: 80px 5%;
+            text-align: center;
+            border-top: 1px solid var(--cake-pink);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            font-size: 2.2rem;
+        }
+
+        .social-icons a { color: var(--chocolate); transition: 0.3s; }
+        .social-icons a:hover { color: var(--berry-red); transform: scale(1.2); }
+
+        footer {
+            background: var(--chocolate);
+            color: var(--frosting);
+            text-align: center;
+            padding: 40px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 3.5rem; }
+            .section-title { font-size: 3rem; }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle { display: flex; }
+            
+            nav {
+                display: none; /* Hide standard nav */
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--frosting);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                border-bottom: 2px solid var(--cake-pink);
+            }
+
+            nav.active { display: flex; }
+
+            nav a {
+                margin: 10px 0;
+                font-size: 1rem;
+            }
+
+            .hero h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2.2rem; }
+            .logo { font-size: 1.5rem; }
+            .about-container { flex-direction: column; text-align: center; }
+            .about-content { text-align: center; }
+            .about-image img { width: 280px; height: 280px; }
+            .order-form-container { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body id="home">
+
+    <header>
+        <a href="#home" class="logo">#PatTheeBaker Sweet Treats</a>
+        
+        <button class="mobile-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="navMenu">
+            <a href="#home" onclick="toggleMenu()">Home</a>
+            <a href="#about" onclick="toggleMenu()">About</a>
+            <a href="#menu" onclick="toggleMenu()">Gallery</a>
+            <a href="#order" onclick="toggleMenu()">Order</a>
+            <a href="#cancel" onclick="toggleMenu()">Cancel Order</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Sweet Treats</h1>
+        <p style="font-size: 1.2rem; font-style: italic;">#PatTheeBaker Sweet Treats: Turning your vision into a delicious reality.</p>
+        <a href="#menu" class="btn" style="margin-top: 30px; background: var(--berry-red);">View Collection</a>
+    </section>
+
+    <section class="about-section" id="about">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 50px;">About #PatTheeBaker</h2>
+        <div class="about-container">
+            <div class="about-image">
+                <img src="PatTheeBaker.png" onerror="this.src='https://via.placeholder.com/400?text=#PatTheeBaker';" alt="#PatTheeBaker Sweet Treats Logo">
+            </div>
+            <div class="about-content">
+                <p>Welcome to <strong>#PatTheeBaker Sweet Treats</strong>, where passion meets precision. Based in the heart of Gauteng, we specialize in bespoke cake designs that are as beautiful as they are delicious.</p>
+                <p>From whimsical unicorn dreams and elegant wedding masterpieces to personalized picture cakes, every creation is baked from scratch using the finest ingredients. Our mission is to add a touch of sweetness to your special milestones, ensuring that your vision is transformed into an edible reality.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="menu">
+        <h2 class="section-title">The Gallery</h2>
+        <div class="search-container">
+            <input type="text" id="cakeSearch" placeholder="Search for your theme..." onkeyup="searchCakes()">
+        </div>
+
+        <div class="cake-grid" id="cakeGrid"></div>
+    </section>
+
+    <section class="section" id="order" style="background-color: var(--cake-pink);">
+        <h2 class="section-title" style="color: var(--frosting);">Place Your Order</h2>
+        <p style="color: var(--frosting); margin-bottom: 20px;">Provide your details and we will finalize the booking on WhatsApp.</p>
+        
+        <div class="order-form-container">
+            <form id="whatsappForm">
+                <div class="form-group">
+                    <label>Full Name & Surname</label>
+                    <input type="text" id="clientName" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Cake Flavor/Theme</label>
+                    <select id="cakeSelect" required>
+                        <option value="">-- Click to choose from our list --</option>
+                    </select>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-group">
+                        <label>Event Date</label>
+                        <input type="date" id="eventDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Time to receive cake</label>
+                        <input type="time" id="eventTime" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn" style="width: 100%; background: #25D366; font-size: 1rem;">
+                    <i class="fab fa-whatsapp"></i> Order from #PatTheeBaker Sweet Treats
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <section class="cancel-section" id="cancel">
+        <h2 class="section-title" style="font-size: 2.5rem;">Need to Cancel?</h2>
+        <p>Life happens, and we understand. To cancel or reschedule your order, please contact us directly via WhatsApp at least 48 hours before your event date.</p>
+        <p style="margin-bottom: 20px; font-weight: bold;">Please note: Deposits may be non-refundable depending on the notice period.</p>
+        <a href="https://wa.me/27760686380?text=I%20would%20like%20to%20cancel/reschedule%20my%20order" class="btn">Message to Cancel</a>
+    </section>
+
+    <section class="social-footer" id="contact">
+        <h2 class="section-title" style="font-size: 2.5rem;">Connect With Us</h2>
+        <p>Follow #PatTheeBaker Sweet Treats for daily updates</p>
+        
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="https://wa.me/27760686380"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 #PatTheeBaker Sweet Treats. Based in Gauteng, South Africa.</p>
+    </footer>
+
+    <script>
+        // Toggle mobile menu
+        function toggleMenu() {
+            if (window.innerWidth <= 768) {
+                document.getElementById('navMenu').classList.toggle('active');
+            }
+        }
+
+        const cakes = [
+            { name: "Unicorn Theme Cake", price: "R 950,00", desc: "25cm 4 big layers, 3 different flavors", img: "Unicorn Theme Cake.png" },
+            { name: "Heartshape (Small)", price: "R 350,00", desc: "15cm 2 Layer, 1 flavor", img: "Heartshape (Small).png" },
+            { name: "Minnie Cake (Tier 1)", price: "R 300,00", desc: "15cm 2 Layer, 1 flavor", img: "Minnie Cake (Tier 1).png" },
+            { name: "Sweet 16 Cake", price: "R 750,00", desc: "25cm 4 layers, 2 different flavors", img: "Sweet 16 Cake.png" },
+            { name: "Traditional Wedding Cake", price: "R 2 500,00", desc: "30cm & 25cm tiers, 3 big layers each", img: "Traditional Wedding Cake.png" },
+            { name: "Minnie Cake (Tier 2)", price: "R 450,00", desc: "15cm 3 layers, 1 flavor", img: "Minnie Cake (Tier 2).png" },
+            { name: "Elegant Sweet 16", price: "R 650,00", desc: "15cm 4 big layers, 2 different flavors", img: "Elegant Sweet 16.png" },
+            { name: "Heartshape (Medium)", price: "R 650,00", desc: "15cm 3 layers, 2 different flavors", img: "Heartshape (Medium).png" },
+            { name: "Elegant White Cake", price: "R 750,00", desc: "15cm by 18cm, Pure white and chocolate drip", img: "Elegant White Cake.png" },
+            { name: "Pure White & Chocolate Drip", price: "R 750,00", desc: "25cm by 18cm 4 big layers, 2 flavors", img: "Pure White & Chocolate Drip.png" },
+            { name: "Heart Shaped (Choose Flavors)", price: "R 650,00", desc: "3 layers, customizable flavors", img: "Heart Shaped (Choose Flavors).png" },
+            { name: "Cocomelon Cake + 12 Cupcakes", price: "R 750,00", desc: "15cm by 18cm 4 layers + Cupcakes", img: "Cocomelon Cake + 12 Cupcakes.png" },
+            { name: "21st Birthday Elegant", price: "R 3 500,00", desc: "3 Tiers (30/27/25cm), mixed flavors", img: "21st Birthday Elegant.png" },
+            { name: "Personalised Picture Cake", price: "R 850,00", desc: "30x30cm, 2 different flavors", img: "Personalised Picture Cake.png" },
+            { name: "Elegant Wedding Cake", price: "R 1 900,00", desc: "25cm & 20cm tiers, 4 layers each", img: "Elegant Wedding Cake.png" },
+            { name: "21st Birthday Cake (Tiered)", price: "R 2 000,00", desc: "30cm & 25cm tiers, 3 big layers each", img: "21st Birthday Cake (Tiered).png" },
+            { name: "Grand Trad Wedding Cake", price: "R 3 500,00", desc: "30x30 bottom, 2 side cakes (25cm each)", img: "Grand Trad Wedding Cake.png" },
+            { name: "Minnie Mouse (Luxury)", price: "R 1 000,00", desc: "2 tier, 5 layers, 25cm & 15cm", img: "Minnie Mouse (Luxury).png" },
+            { name: "Spider Man Cake", price: "R 450,00", desc: "15cm by 18cm themed design", img: "Spider Man Cake.png" },
+            { name: "Minnie Mouse + 12 Cupcakes", price: "R 850,00", desc: "25cm 4 layers combo", img: "Minnie Mouse + 12 Cupcakes.png" },
+            { name: "Bible Theme Cake", price: "R 1 900,00", desc: "2 tier cake, 3 flavors", img: "Bible Theme Cake.png" }
+        ];
+
+        function displayCakes(cakeList) {
+            const grid = document.getElementById('cakeGrid');
+            grid.innerHTML = cakeList.map(cake => `
+                <div class="cake-card">
+                    <div class="cake-img-container">
+                        <img src="${cake.img}" onerror="this.src='https://via.placeholder.com/300x300?text=Cake+Sample';" alt="${cake.name}">
+                    </div>
+                    <div class="cake-info">
+                        <h3>${cake.name}</h3>
+                        <p>${cake.desc}</p>
+                        <span class="price">${cake.price}</span>
+                        <a href="#order" class="btn" onclick="preSelectCake('${cake.name}')">Select To Order</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function populateDropdown() {
+            const select = document.getElementById('cakeSelect');
+            cakes.forEach(cake => {
+                const opt = document.createElement('option');
+                opt.value = `${cake.name} (${cake.price})`;
+                opt.innerHTML = `${cake.name} - ${cake.price}`;
+                select.appendChild(opt);
+            });
+        }
+
+        function preSelectCake(cakeName) {
+            const select = document.getElementById('cakeSelect');
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].value.includes(cakeName)) {
+                    select.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+
+        function searchCakes() {
+            const term = document.getElementById('cakeSearch').value.toLowerCase();
+            const filtered = cakes.filter(c => c.name.toLowerCase().includes(term) || c.desc.toLowerCase().includes(term));
+            displayCakes(filtered);
+        }
+
+        document.getElementById('whatsappForm').onsubmit = function(e) {
+            e.preventDefault();
+            const name = document.getElementById('clientName').value;
+            const cake = document.getElementById('cakeSelect').value;
+            const date = document.getElementById('eventDate').value;
+            const time = document.getElementById('eventTime').value;
+            const phone = "27760686380";
+
+            const message = `*NEW ORDER FOR #PATTHEEBAKER SWEET TREATS*%0A%0A` +
+                            `*Client:* ${name}%0A` +
+                            `*Cake:* ${cake}%0A` +
+                            `*Date Required:* ${date}%0A` +
+                            `*Time Required:* ${time}%0A%0A` +
+                            `Please confirm availability.`;
+
+            window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+        };
+
+        displayCakes(cakes);
+        populateDropdown();
+    </script>
+</body>
+</html>
