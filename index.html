@@ -60,7 +60,6 @@
 
         nav a:hover { color: var(--berry-red); }
 
-        /* Mobile Menu Button (Hidden on Desktop) */
         .mobile-toggle {
             display: none;
             flex-direction: column;
@@ -290,16 +289,10 @@
         }
 
         /* --- RESPONSIVE ADJUSTMENTS --- */
-        @media (max-width: 1024px) {
-            .hero h1 { font-size: 3.5rem; }
-            .section-title { font-size: 3rem; }
-        }
-
         @media (max-width: 768px) {
             .mobile-toggle { display: flex; }
-            
             nav {
-                display: none; /* Hide standard nav */
+                display: none;
                 position: absolute;
                 top: 100%;
                 left: 0;
@@ -310,14 +303,8 @@
                 box-shadow: 0 10px 20px rgba(0,0,0,0.1);
                 border-bottom: 2px solid var(--cake-pink);
             }
-
             nav.active { display: flex; }
-
-            nav a {
-                margin: 10px 0;
-                font-size: 1rem;
-            }
-
+            nav a { margin: 10px 0; font-size: 1rem; }
             .hero h1 { font-size: 2.5rem; }
             .section-title { font-size: 2.2rem; }
             .logo { font-size: 1.5rem; }
@@ -362,7 +349,7 @@
             </div>
             <div class="about-content">
                 <p>Welcome to <strong>#PatTheeBaker Sweet Treats</strong>, where passion meets precision. Based in the heart of Gauteng, we specialize in bespoke cake designs that are as beautiful as they are delicious.</p>
-                <p>From whimsical unicorn dreams and elegant wedding masterpieces to personalized picture cakes, every creation is baked from scratch using the finest ingredients. Our mission is to add a touch of sweetness to your special milestones, ensuring that your vision is transformed into an edible reality.</p>
+                <p>From whimsical unicorn dreams and elegant wedding masterpieces to personalized picture cakes, every creation is baked from scratch using the finest ingredients.</p>
             </div>
         </div>
     </section>
@@ -372,7 +359,6 @@
         <div class="search-container">
             <input type="text" id="cakeSearch" placeholder="Search for your theme..." onkeyup="searchCakes()">
         </div>
-
         <div class="cake-grid" id="cakeGrid"></div>
     </section>
 
@@ -414,22 +400,37 @@
     </section>
 
     <section class="cancel-section" id="cancel">
+
         <h2 class="section-title" style="font-size: 2.5rem;">Need to Cancel?</h2>
+
         <p>Life happens, and we understand. To cancel or reschedule your order, please contact us directly via WhatsApp at least 48 hours before your event date.</p>
+
         <p style="margin-bottom: 20px; font-weight: bold;">Please note: Deposits may be non-refundable depending on the notice period.</p>
+
         <a href="https://wa.me/27760686380?text=I%20would%20like%20to%20cancel/reschedule%20my%20order" class="btn">Message to Cancel</a>
+
     </section>
 
     <section class="social-footer" id="contact">
+
         <h2 class="section-title" style="font-size: 2.5rem;">Connect With Us</h2>
+
         <p>Follow #PatTheeBaker Sweet Treats for daily updates</p>
+
         
+
         <div class="social-icons">
+
             <a href="#"><i class="fab fa-facebook"></i></a>
+
             <a href="#"><i class="fab fa-instagram"></i></a>
+
             <a href="#"><i class="fab fa-tiktok"></i></a>
+
             <a href="https://wa.me/27760686380"><i class="fab fa-whatsapp"></i></a>
+
         </div>
+
     </section>
 
     <footer>
@@ -437,7 +438,6 @@
     </footer>
 
     <script>
-        // Toggle mobile menu
         function toggleMenu() {
             if (window.innerWidth <= 768) {
                 document.getElementById('navMenu').classList.toggle('active');
@@ -489,7 +489,7 @@
             const select = document.getElementById('cakeSelect');
             cakes.forEach(cake => {
                 const opt = document.createElement('option');
-                opt.value = `${cake.name} (${cake.price})`;
+                opt.value = cake.name;
                 opt.innerHTML = `${cake.name} - ${cake.price}`;
                 select.appendChild(opt);
             });
@@ -498,7 +498,7 @@
         function preSelectCake(cakeName) {
             const select = document.getElementById('cakeSelect');
             for (let i = 0; i < select.options.length; i++) {
-                if (select.options[i].value.includes(cakeName)) {
+                if (select.options[i].value === cakeName) {
                     select.selectedIndex = i;
                     break;
                 }
@@ -519,12 +519,13 @@
             const time = document.getElementById('eventTime').value;
             const phone = "27760686380";
 
-            const message = `*NEW ORDER FOR #PATTHEEBAKER SWEET TREATS*%0A%0A` +
-                            `*Client:* ${name}%0A` +
-                            `*Cake:* ${cake}%0A` +
-                            `*Date Required:* ${date}%0A` +
-                            `*Time Required:* ${time}%0A%0A` +
-                            `Please confirm availability.`;
+            // Salon-style booking request format
+            const message = `Hello Gcinile's Salon,%0A%0A` +
+                            `NEW ORDER:%0A` +
+                            `Full Name: ${name}%0A` +
+                            `Cake Flavor/Theme: ${cake}%0A` +
+                            `Event Date : ${date}%0A` +
+                            `Event Start Time: ${time}`;
 
             window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
         };
